@@ -318,6 +318,18 @@ Class Action {
 		extract($_POST);
 		$update = $this->db->query("UPDATE parcels set status= $status where id = $id");
 		$save = $this->db->query("INSERT INTO parcel_tracks set status= $status , parcel_id = $id");
+
+		$parcel = $this->db->query("SELECT * FROM parcels where id = '$id'");
+		$parcel = $parcel->fetch_array();
+
+		if ($status == 2) {
+			$this->send_sms($parcel['sender_contact'], $status);
+		}
+		
+		if ($status == 6) {
+			$this->send_sms($parcel['recipient_contact'], $status);
+		}
+		
 		if($update && $save)
 			return 1;  
 	}
@@ -354,5 +366,21 @@ Class Action {
 			$data[] = $row;
 		}
 		return json_encode($data);
+	}
+
+	function send_sms($phone, $status){
+		require 'twilio.php';
+
+		$body = "";
+
+		if ($status == 2) {
+			$body = "Dear customer your package has been shipped. Thanks for using our services.";
+		}
+		
+		if ($status == 6) {
+			$body = "Dear customer your package is ready for pickup. Please come to our office.";
+		}
+
+		send_text($phone, $body);
 	}
 }
