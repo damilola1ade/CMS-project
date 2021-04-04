@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2020 at 08:10 AM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.2.33
+-- Generation Time: Apr 04, 2021 at 01:16 PM
+-- Server version: 10.1.34-MariaDB
+-- PHP Version: 7.2.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -36,7 +37,7 @@ CREATE TABLE `branches` (
   `zip_code` varchar(50) NOT NULL,
   `country` text NOT NULL,
   `contact` varchar(100) NOT NULL,
-  `date_created` datetime NOT NULL DEFAULT current_timestamp()
+  `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -44,9 +45,10 @@ CREATE TABLE `branches` (
 --
 
 INSERT INTO `branches` (`id`, `branch_code`, `street`, `city`, `state`, `zip_code`, `country`, `contact`, `date_created`) VALUES
-(1, 'vzTL0PqMogyOWhF', 'Branch 1 St., Quiapo', 'Manila', 'Metro Manila', '1001', 'Philippines', '+2 123 455 623', '2020-11-26 11:21:41'),
-(3, 'KyIab3mYBgAX71t', 'SAmple', 'Cebu', 'Cebu', '6000', 'Philippines', '+1234567489', '2020-11-26 16:45:05'),
-(4, 'dIbUK5mEh96f0Zc', 'Sample', 'Sample', 'Sample', '123456', 'Philippines', '123456', '2020-11-27 13:31:49');
+(1, 'AL 001', '2nd Avenue, House 6', 'Wuse', 'Abuja', '20334', 'Nigeria', '08138486922', '2020-11-26 11:21:41'),
+(3, 'AL 002', '2, Along Dami Iyi St.', 'Maryland', 'Lagos', '10015', 'Nigeria', '07055985606', '2020-11-26 16:45:05'),
+(4, 'AL 003', 'House 13, Azikel road', 'Otuoke', 'Bayelsa State', '12912', 'Nigeria', '09087654312', '2020-11-27 13:31:49'),
+(5, 'AL 004', 'Opp. GTBank', 'Port Harcourt', 'Rivers State', '10007', 'Nigeria', '0809623551', '2020-12-11 03:56:41');
 
 -- --------------------------------------------------------
 
@@ -72,7 +74,7 @@ CREATE TABLE `parcels` (
   `length` varchar(100) NOT NULL,
   `price` float NOT NULL,
   `status` int(2) NOT NULL,
-  `date_created` datetime NOT NULL DEFAULT current_timestamp()
+  `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -80,12 +82,13 @@ CREATE TABLE `parcels` (
 --
 
 INSERT INTO `parcels` (`id`, `reference_number`, `sender_name`, `sender_address`, `sender_contact`, `recipient_name`, `recipient_address`, `recipient_contact`, `type`, `from_branch_id`, `to_branch_id`, `weight`, `height`, `width`, `length`, `price`, `status`, `date_created`) VALUES
-(1, '201406231415', 'John Smith', 'Sample', '+123456', 'Claire Blake', 'Sample', 'Sample', 1, 1, 0, '30kg', '12in', '12in', '15in', 2500, 7, '2020-11-26 16:15:46'),
-(2, '117967400213', 'John Smith', 'Sample', '+123456', 'Claire Blake', 'Sample', 'Sample', 2, 1, 3, '30kg', '12in', '12in', '15in', 2500, 1, '2020-11-26 16:46:03'),
-(3, '983186540795', 'John Smith', 'Sample', '+123456', 'Claire Blake', 'Sample', 'Sample', 2, 1, 3, '20Kg', '10in', '10in', '10in', 1500, 2, '2020-11-26 16:46:03'),
-(4, '514912669061', 'Claire Blake', 'Sample', '+123456', 'John Smith', 'Sample Address', '+12345', 2, 4, 1, '23kg', '12in', '12in', '15in', 1900, 0, '2020-11-27 13:52:14'),
-(5, '897856905844', 'Claire Blake', 'Sample', '+123456', 'John Smith', 'Sample Address', '+12345', 2, 4, 1, '30kg', '10in', '10in', '10in', 1450, 0, '2020-11-27 13:52:14'),
-(6, '505604168988', 'John Smith', 'Sample', '+123456', 'Sample', 'Sample', '+12345', 1, 0, 0, '23kg', '12in', '12in', '15in', 2500, 1, '2020-11-27 14:06:42');
+(1, '201406231415', 'Femi Oni', 'Gwarinpa, Abuja', '090123431', 'Olumide Asa', 'Airport Road, Abuja', '0812534116', 1, 1, 0, '30kg', '12in', '12in', '15in', 3000, 7, '2020-11-26 16:15:46'),
+(2, '117967400213', 'Deborah A.', 'Wuse 2, Abuja', '08034561189', 'Clara John', 'Maryland, Lagos', '07012415561', 2, 1, 3, '30kg', '12in', '12in', '15in', 2500, 4, '2020-11-26 16:46:03'),
+(3, '983186540795', 'Otis Biobele ', 'Otuoke, Bayelsa State', '08033146183', 'Mark Oshone', 'Port Harcourt, Rivers State', '08099765112', 2, 4, 5, '5Kg', '10in', '10in', '10in', 800, 8, '2020-11-26 16:46:03'),
+(4, '514912669061', 'Victoria Osihmen', 'Ikorodu, Lagos', '08012745678', 'Bukky Adio', 'Rumuokoro, Port Harcourt', '0901234567', 2, 4, 1, '23kg', '12in', '12in', '15in', 1900, 0, '2020-11-27 13:52:14'),
+(5, '897856905844', 'Jade Sola', 'Port Harcourt', '08136762133', 'Kenny Taye', 'Otuoke', '08097612311', 2, 5, 4, '30kg', '10in', '10in', '10in', 1450, 3, '2020-11-27 13:52:14'),
+(6, '505604168988', 'Bolu Oluwa', 'House 11, Lugbe, Abuja', '08076543442', 'Raro Abdul', 'Opp. NIMC, House 2, Wuse, Abuja', '08099760905', 1, 0, 0, '23kg', '12in', '12in', '15in', 2500, 1, '2020-11-27 14:06:42'),
+(8, '001204912728', 'Moses Akpu', 'Otuoke, Bayelsa State', '123', 'Laurencia Poto', 'Rumuokoro, Port Harcourt', '456', 2, 4, 4, '5Kg', '17', '8', '9', 1500, 4, '2021-02-03 13:25:37');
 
 -- --------------------------------------------------------
 
@@ -97,7 +100,7 @@ CREATE TABLE `parcel_tracks` (
   `id` int(30) NOT NULL,
   `parcel_id` int(30) NOT NULL,
   `status` int(2) NOT NULL,
-  `date_created` datetime NOT NULL DEFAULT current_timestamp()
+  `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -114,7 +117,12 @@ INSERT INTO `parcel_tracks` (`id`, `parcel_id`, `status`, `date_created`) VALUES
 (7, 1, 5, '2020-11-27 11:05:17'),
 (8, 1, 7, '2020-11-27 11:05:26'),
 (9, 3, 2, '2020-11-27 11:05:41'),
-(10, 6, 1, '2020-11-27 14:06:57');
+(10, 6, 1, '2020-11-27 14:06:57'),
+(11, 2, 4, '2020-12-11 14:09:49'),
+(12, 5, 3, '2020-12-11 14:10:12'),
+(13, 3, 8, '2020-12-11 14:10:31'),
+(14, 7, 1, '2021-01-10 22:43:49'),
+(15, 8, 4, '2021-04-03 10:29:42');
 
 -- --------------------------------------------------------
 
@@ -136,7 +144,7 @@ CREATE TABLE `system_settings` (
 --
 
 INSERT INTO `system_settings` (`id`, `name`, `email`, `contact`, `address`, `cover_img`) VALUES
-(1, 'Courier Management System', 'info@sample.comm', '+6948 8542 623', '2102  Caldwell Road, Rochester, New York, 14608', '');
+(1, 'Adegbemile Logistics', 'adegbemile@gmail.com', '08123471990', '5th Avenue, Wuse, Abuja', '');
 
 -- --------------------------------------------------------
 
@@ -150,9 +158,9 @@ CREATE TABLE `users` (
   `lastname` varchar(200) NOT NULL,
   `email` varchar(200) NOT NULL,
   `password` text NOT NULL,
-  `type` tinyint(1) NOT NULL DEFAULT 2 COMMENT '1 = admin, 2 = staff',
+  `type` tinyint(1) NOT NULL DEFAULT '2' COMMENT '1 = admin, 2 = staff',
   `branch_id` int(30) NOT NULL,
-  `date_created` datetime NOT NULL DEFAULT current_timestamp()
+  `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -161,8 +169,10 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `type`, `branch_id`, `date_created`) VALUES
 (1, 'Administrator', '', 'admin@admin.com', '0192023a7bbd73250516f069df18b500', 1, 0, '2020-11-26 10:57:04'),
-(2, 'John', 'Smith', 'jsmith@sample.com', '1254737c076cf867dc53d60a0364f38e', 2, 1, '2020-11-26 11:52:04'),
-(3, 'George', 'Wilson', 'gwilson@sample.com', 'd40242fb23c45206fadee4e2418f274f', 2, 4, '2020-11-27 13:32:12');
+(2, 'Moses', 'Sapele', 'mosalah@gmail.com', '52bd43d37ed62eb4c226e31841bc03dc', 2, 1, '2020-11-26 11:52:04'),
+(3, 'Preye', 'Goodluck', 'preye@gmail.com', '1d59d7f5f33814aeafb86064319b2be1', 2, 4, '2020-11-27 13:32:12'),
+(4, 'Valerie', 'Egona', 'valerie@gmail.com', '6818bab4da85a3a138cdfa35cfc7a64f', 2, 3, '2020-12-11 03:38:10'),
+(5, 'Abigail', 'Clinton', 'abigail@gmail.com', '37f299007792a4e9dec1481bca604016', 2, 5, '2020-12-11 15:16:38');
 
 --
 -- Indexes for dumped tables
@@ -206,19 +216,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `branches`
 --
 ALTER TABLE `branches`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `parcels`
 --
 ALTER TABLE `parcels`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `parcel_tracks`
 --
 ALTER TABLE `parcel_tracks`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `system_settings`
@@ -230,7 +240,7 @@ ALTER TABLE `system_settings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
