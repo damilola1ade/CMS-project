@@ -10,7 +10,7 @@ function send_text($phone, $body)
 {
     // Your Account SID and Auth Token from twilio.com/console
     $sid = 'AC83bfab7390cb650657e364fe18fdb211';
-    $token = '0236c196d38ed62917895a47f3b621f0';
+    $token = '8602a9027251dfd4d27643343cd6d006';
     $client = new Client($sid, $token);
     $phone = '+234' . $phone;
 
